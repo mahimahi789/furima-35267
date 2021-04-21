@@ -24,12 +24,12 @@
 | ------   | ---------- | ------------------------------ |
 | item_name | text       | null: false |
 | item_description   | text | null: false |
-| category_id | integer | null: false, foreign_key: true |
-| condiion_id | integer | null: false, foreign_key: true |
-| burden_id   | integer | null: false, foreign_key: true |
-| area_id     | integer | null: false, foreign_key: true |
-| days_id     | integer | null: false, foreign_key: true |
-| plice    | integer | null: false, foreign_key: true |
+| category_id | integer | null: false |
+| condiion_id | integer | null: false |
+| burden_id   | integer | null: false |
+| area_id     | integer | null: false |
+| days_id     | integer | null: false |
+| price    | integer | null: false |
 | user_id  | integer | null: false, foreign_key: true |
 
 ### Association
@@ -64,6 +64,6 @@
 
 - belongs_to :item
 - belongs_to :user
-- has_one :addresse
+- has_one :address
 
 
