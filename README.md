@@ -63,7 +63,7 @@
 ### Association
 
 - belongs_to :item
-- has_one :user
+- belongs_to :user
 - has_one :addresse
 
 
