@@ -16,6 +16,7 @@
 ### Association
 
 - has_many :items
+- has_many :buy_manage
 
 ## items テーブル
 
@@ -33,7 +34,8 @@
 
 ### Association
 
-- has_one :sadress
+- has_one :saddress
+- has_one :users
 
 ## saddress テーブル
 
