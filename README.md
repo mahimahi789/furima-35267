@@ -7,10 +7,10 @@
 | name     | string | null: false |
 | email    | string | null: false, unique: true|
 | encrypted_password | string | null: false |
-| j.name   | string | null: felse |
-| j.k.name | string | null: false |
-| j.k.n.name | string | null: false |
-| j.k.n.c.name | string | null: false |
+| j_name   | string | null: felse |
+| j_k_name | string | null: false |
+| j_k_n_name | string | null: false |
+| j_k_n_c_name | string | null: false |
 | birthday | date | null: false |
 
 ### Association
@@ -30,14 +30,15 @@
 | area_id     | integer | null: false, foreign_key: true |
 | days_id     | integer | null: false, foreign_key: true |
 | plice    | integer | null: false, foreign_key: true |
+| user_id  | integer | null: false, foreign_key: true |
 | image    |
 
 ### Association
 
-- has_one :saddress
-- has_one :users
+- has_one :addresses
+- belongs_to :user
 
-## saddress テーブル
+## addresses テーブル
 
 | Column  | Type       | Options                         |
 | ------- | ---------- | ------------------------------  |
@@ -46,6 +47,7 @@
 | address | string | null: false  ｜
 | building | string |      ｜
 | phonenum | string | null: false  ｜
+| post_num | string | null: false  |
 
 ### Association
 
@@ -55,8 +57,8 @@
 
 | Column  | Type       | Options                         |
 | ------- | ---------- | ------------------------------  |
-| name | string | null: false |
-| item_name | text | null: false |
+| user_id | string | null: false |
+| item_id | text | null: false |
 
 ### Association
 
