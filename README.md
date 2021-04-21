@@ -35,7 +35,7 @@
 
 ### Association
 
-- has_one :addresses
+- has_one :addresse
 - belongs_to :user
 
 ## addresses テーブル
@@ -46,22 +46,25 @@
 | municipality | string | null: false  ｜
 | address | string | null: false  ｜
 | building | string |      ｜
-| phonenum | string | null: false  ｜
+| phone_num | string | null: false  ｜
 | post_num | string | null: false  |
+| buy_manage_id | integer | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :items
 
-## buy_manage テーブル
+
+## buy_manages テーブル
 
 | Column  | Type       | Options                         |
 | ------- | ---------- | ------------------------------  |
-| user_id | string | null: false |
-| item_id | text | null: false |
+| user_id | integer | null: false, foreign_key: true |
+| item_id | integer | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :items
+- belongs_to :item
+- has_one :user
+- has_one :addresse
 
 
