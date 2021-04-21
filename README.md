@@ -16,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :buy_manage
+- has_many :buy_manages
 
 ## items テーブル
 
@@ -31,18 +31,17 @@
 | days_id     | integer | null: false, foreign_key: true |
 | plice    | integer | null: false, foreign_key: true |
 | user_id  | integer | null: false, foreign_key: true |
-| image    |
 
 ### Association
 
-- has_one :addresse
+- has_one :buy_manage
 - belongs_to :user
 
 ## addresses テーブル
 
 | Column  | Type       | Options                         |
 | ------- | ---------- | ------------------------------  |
-| area_id     | integer | null: false, foreign_key: true |
+| area_id     | integer | null: false |
 | municipality | string | null: false  ｜
 | address | string | null: false  ｜
 | building | string |      ｜
