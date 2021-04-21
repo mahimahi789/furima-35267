@@ -13,7 +13,7 @@
 
 ### Association
 
-
+- has_many :items
 
 ## items テーブル
 
@@ -51,3 +51,14 @@
 ### Association
 
 - has_one :items
+
+## buy_manage テーブル
+
+| Column  | Type       | Options                         |
+| ------- | ---------- | ------------------------------  |
+| name | string | null: false |
+| item_name | text | null: false |
+
+### Association
+
+- has_many :items
