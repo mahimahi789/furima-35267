@@ -14,6 +14,9 @@ RSpec.describe User, type: :model do
           @user.password_confirmation = 'abcd12'
           expect(@user).to be_valid
         end
+        it '正しい情報が入力されていれば、登録できる' do
+          expect(@user).to be_valid
+        end
       end
       context 'ユーザーの新規登録ができない時' do
         it 'emailが空では登録できない' do
@@ -43,7 +46,79 @@ RSpec.describe User, type: :model do
           @user.valid?  
           expect(@user.errors.full_messages).to include("Email is invalid")
         end
+        it 'passwordが英語のみでは登録できない' do
+          @user.password_confirmation = 'bbbbbbbb'
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        end
+        it 'passwordが6文字以上でないと登録できない' do
+          @user.password_confirmation = 'bbbb2222'
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        end
+        it 'passwordが数字のみでは登録できない' do
+          @user.password_confirmation = '1111111111'
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        end
+        it 'nameが空では登録できない' do
+          @user.name = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Name can't be blank")
+        end
+        it 'j_nameが空では登録できない' do
+          @user.j_name = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("J name can't be blank")
+        end
+        it 'j_nameが全角以外では登録できない' do
+          @user.j_name = 'hoge'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('J name には全角文字を使用してください')
+        end
+        it 'j_k_nameが空では登録できない' do
+          @user.j_k_name = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("J k name can't be blank")
+        end
+        it 'j_k_nameが全角以外では登録できない' do
+          @user.j_k_name = 'hoge'
+          @user.valid?
+          #expect(@user.errors.full_messages).to include('J k name には全角文字を使用してください')
+        end
+        it 'j_k_n_nameが空では登録できない' do
+          @user.j_k_n_name = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("J k n name can't be blank")
+        end 
+        it 'j_k_n_nameがカタカナ以外では登録できない' do
+          @user.j_k_n_name = 'あああああ'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('J k n name には全角カタカナを使用してください')
+        end
+        it 'j_k_n_c_nameが空では登録できない' do
+          @user.j_k_n_c_name = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("J k n c name can't be blank")
+        end
+        it 'j_k_n_c_nameがカタカナ以外では登録できない' do
+          @user.j_k_n_c_name = 'ｱｱｱｱｱ'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('J k n c name には全角カタカナを使用してください')
+        end
+        it 'birthdayが空では登録できない' do
+          @user.birthday = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Birthday can't be blank")
+        end
       end
     end
   end
 end
+
+
+
+
+
+
+
