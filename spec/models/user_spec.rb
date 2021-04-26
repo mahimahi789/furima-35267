@@ -84,7 +84,7 @@ RSpec.describe User, type: :model do
         it 'j_k_nameが全角以外では登録できない' do
           @user.j_k_name = 'hoge'
           @user.valid?
-          #expect(@user.errors.full_messages).to include('J k name には全角文字を使用してください')
+          expect(@user.errors.full_messages).to include('J k name には全角文字を使用してください')
         end
         it 'j_k_n_nameが空では登録できない' do
           @user.j_k_n_name = ''
@@ -110,6 +110,11 @@ RSpec.describe User, type: :model do
           @user.birthday = ''
           @user.valid?
           expect(@user.errors.full_messages).to include("Birthday can't be blank")
+        end
+        it '全角では登録できない' do
+          @user.password_confirmation = 'ああああああああ'
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
       end
     end
