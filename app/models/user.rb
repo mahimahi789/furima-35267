@@ -3,15 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-      
-  validates :name, presence: true      
-  validates :email, presence: true     
-  validates :encrypted_password, presence: true, length: { minimum: 7 }
-  validates :j_name,  presence: true 
-  validates :j_k_name, presence: true 
-  validates :j_k_n_name, presence: true 
-  validates :j_k_n_c_name, presence: true 
-  validates :birthday, presence: true 
+  with_options presence: true do
+    validates :name
+    validates :j_name, format: {with: /\A[ぁ-んァ-ン一-龥]/, message: "全角漢字ひらがなカタカナを使用してください"}
+    validates :j_k_name, format: {with: /\A[ぁ-んァ-ン一-龥]/, message: "全角漢字ひらがなカタカナを使用してください"}
+    validates :j_k_n_name, format: {with: /\A[ァ-ヶー－]+\z/, message: "全角カタカナを使用してください"}
+    validates :j_k_n_c_name, format: {with: /\A[ァ-ヶー－]+\z/, message: "全角カタカナを使用してください"}
+    validates :encrypted_password,:password,:password_confirmation,length:{minimum:6},format:{with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/}
+  end   
+
 
   has_many :items
   has_many :buy_manages
