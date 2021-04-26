@@ -16,8 +16,8 @@ class UsersController < ApplicationController
    # @items = user.items  
   end
 
-  #def create
-  #end
+  def create
+  end
 
   private
 
