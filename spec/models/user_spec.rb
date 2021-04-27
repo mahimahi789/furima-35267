@@ -37,11 +37,12 @@ RSpec.describe User, type: :model do
          expect(another_user.errors.full_messages).to include('Email has already been taken')
         end
         it 'passwordが存在してもpassword_confirmationが同じでないと登録できない' do
+          @user.password = 'cccc3333'
           @user.password_confirmation = 'bbbb2222'
           @user.valid?
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
-        it 'メールアドレスは、@を含まない登録できない' do
+        it 'メールアドレスは、@を含まないと登録できない' do
           @user.email = 'test.com'
           @user.valid?  
           expect(@user.errors.full_messages).to include("Email is invalid")
@@ -52,7 +53,7 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
         it 'passwordが6文字以上でないと登録できない' do
-          @user.password_confirmation = 'bbbb2222'
+          @user.password_confirmation = 'bbbb2'
           @user.valid?
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
