@@ -48,17 +48,17 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Email is invalid")
         end
         it 'passwordが英語のみでは登録できない' do
-          @user.password_confirmation = 'bbbbbbbb'
+          @user.password = 'bbbbbbbb'
           @user.valid?
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
         it 'passwordが6文字以上でないと登録できない' do
-          @user.password_confirmation = 'bbbb2'
+          @user.password = 'bbb2'
           @user.valid?
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
         it 'passwordが数字のみでは登録できない' do
-          @user.password_confirmation = '1111111111'
+          @user.password = '1111111111'
           @user.valid?
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
