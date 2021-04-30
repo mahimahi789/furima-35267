@@ -36,7 +36,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "category_idは1では登録できない" do
-          @item.category_id = '1'
+          @item.category_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Category must be other than 1")
         end
@@ -48,7 +48,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "burden_idは1では登録できない" do
-          @item.burden_id = '1'
+          @item.burden_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Burden must be other than 1")
         end
@@ -60,7 +60,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "area_idは1では登録できない" do
-          @item.area_id = '1'
+          @item.area_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Area must be other than 1")
         end
@@ -72,7 +72,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "days_idは1では登録できない" do
-          @item.days_id = '1'
+          @item.days_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Days must be other than 1")
         end
@@ -96,13 +96,13 @@ RSpec.describe Item, type: :model do
         end
 
         it "priceは299円以下では登録できないこと" do
-          @item.price = '299'
+          @item.price = 299
           @item.valid?
           expect(@item.errors.full_messages).to include("Price must be greater than 300")
         end
 
         it "priceは10,000,000円以上では登録できないこと" do
-          @item.price = '10000000'
+          @item.price = 10000000
           @item.valid?
           expect(@item.errors.full_messages).to include("Price must be less than 9999999")
         end
