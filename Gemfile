@@ -61,3 +61,6 @@ end
 gem 'devise'
 #gem 'rspec-rails', '~> 4.0.0'
 gem 'pry-rails'
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+gem 'active_hash'

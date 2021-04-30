@@ -19,6 +19,6 @@ class User < ApplicationRecord
     validates :j_k_n_c_name
   end
 
-  #has_many :items
+  has_many :items
   #has_many :buy_manages
 end
