@@ -76,7 +76,43 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include("Days must be other than 1")
         end
+
+        it "priceは全角文字では登録できないこと" do
+          @item.price = '１１１１１１'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is not a number")
+        end
+
+        it "priceは半角英数混合では登録できないこと" do
+          @item.price = '1a1a1aa'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is not a number")
+        end
+
+        it "priceは半角英語だけでは登録できないこと" do
+          @item.price = 'aaaaa'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is not a number")
+        end
+
+        it "priceは299円以下では登録できないこと" do
+          @item.price = '299'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be greater than 300")
+        end
+
+        it "priceは10,000,000円以上では登録できないこと" do
+          @item.price = '10000000'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+        end
       end
     end
   end
 end
+
+
+
+
+
+#10,000,000円以上では登録できないこと
