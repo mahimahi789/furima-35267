@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 
   before_action :authenticate_user!,only: [:new, :create, :edit, :update]
   before_action :set_item, only: [:edit, :update, :show]
-  before_action :move_to_index, only: [:index, :show, :update, :edit]
+  before_action :move_to_index, only: [:show, :update, :edit]
 
   
 
@@ -25,7 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
