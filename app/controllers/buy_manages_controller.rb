@@ -1,17 +1,17 @@
 class BuyManagesController < ApplicationController
-  before_action :move_to_index, only: [:index, :create]
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:index, :create]
   
   def index
     @address_buy_manage = AddressBuyManage.new
     @item = Item.find(params[:item_id])
+    if current_user == @item.user || @item.reload_buy_manage.present?
+      redirect_to root_path
+    end
   end
   
   def create
-    #binding.pry
     @item = Item.find(params[:item_id])
     @address_buy_manage = AddressBuyManage.new(buy_manage_params)
-    #binding.pry
     if @address_buy_manage.valid?
       pay_item
       @address_buy_manage.save
@@ -36,8 +36,6 @@ class BuyManagesController < ApplicationController
     )
   end
 
-  def move_to_index
-    redirect_to root_path unless current_user.id == @address_buy_manage
   end
 end
 
