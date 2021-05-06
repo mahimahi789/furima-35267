@@ -3,11 +3,18 @@ require 'rails_helper'
 RSpec.describe AddressBuyManage, type: :model do
   describe '#create' do
     before do
-      @address_buy_manage = FactoryBot.build(:address_buy_manage)
+      item = FactoryBot.build(:item)
+      user = FactoryBot.build(:user)
+      @address_buy_manage = FactoryBot.build(:address_buy_manage, user_id: [:id], item_id: [:id])
+      sleep 1
     end
 
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
+        expect(@address_buy_manage).to be_valid
+      end
+      it 'buildingは空でも保存できること' do
+        @address_buy_manage.building = ''
         expect(@address_buy_manage).to be_valid
       end
     end
@@ -15,7 +22,7 @@ RSpec.describe AddressBuyManage, type: :model do
     context '内容に問題がある場合' do
       it 'post_numが空だと保存できないこと' do
         @address_buy_manage.post_num = ''
-        @address_buy_manage.valid?
+        @address_buy_manage.valid?  
         expect(@address_buy_manage.errors.full_messages).to include("Post num can't be blank")
       end
       it 'post_numが半角を含んだ正しい形式でないと保存できないこと' do
@@ -29,13 +36,9 @@ RSpec.describe AddressBuyManage, type: :model do
         expect(@address_buy_manage.errors.full_messages).to include("Area can't be blank", "Area is not a number")
       end
       it 'area_idで1を選択すると保存できないこと' do
-        @address_buy_manage.area_id = '1'
+        @address_buy_manage.area_id = 1
         @address_buy_manage.valid?
         expect(@address_buy_manage.errors.full_messages).to include("Area must be other than 1")
-      end
-      it 'buildingは空でも保存できること' do
-        @address_buy_manage.building = ''
-        expect(@address_buy_manage).to be_valid
       end
       it 'addressは空だと保存できないこと' do
         @address_buy_manage.address = ''
@@ -62,6 +65,17 @@ RSpec.describe AddressBuyManage, type: :model do
         @address_buy_manage.valid?
         expect(@address_buy_manage.errors.full_messages).to include("Token can't be blank")
       end
+      it "user_idが空の場合登録できない" do
+        @address_buy_manage.user_id = nil
+        @address_buy_manage.valid?
+        expect(@address_buy_manage.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが空の場合登録できない" do
+        @address_buy_manage.item_id = nil
+        @address_buy_manage.valid?
+        expect(@address_buy_manage.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end
+

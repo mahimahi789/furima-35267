@@ -12,12 +12,11 @@ class AddressBuyManage
     validates :user_id
     validates :item_id
     validates :token
-    #validates :building
+  
   end
  
 
   def save
-    # 各テーブルにデータを保存する処理を書く
     buy_manage = BuyManage.create(user_id: user_id, item_id: item_id)
     Address.create(post_num: post_num, area_id: area_id, municipality: municipality, address: address, building: building, phone_num: phone_num, buy_manage_id: buy_manage.id)
   end

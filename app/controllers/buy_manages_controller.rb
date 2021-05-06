@@ -1,16 +1,16 @@
 class BuyManagesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
-  
+  before_action :set_item, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
+
   def index
     @address_buy_manage = AddressBuyManage.new
-    @item = Item.find(params[:item_id])
     if current_user == @item.user || @item.reload_buy_manage.present?
       redirect_to root_path
     end
   end
   
   def create
-    @item = Item.find(params[:item_id])
     @address_buy_manage = AddressBuyManage.new(buy_manage_params)
     if @address_buy_manage.valid?
       pay_item
@@ -36,6 +36,15 @@ class BuyManagesController < ApplicationController
     )
   end
 
+  def set_item
+    @item = Item.find(params[:item_id])
   end
+
+  def move_to_index
+    if current_user == @item.user || @item.reload_buy_manage.present?
+      redirect_to root_path
+    end
+  end
+
 end
 
