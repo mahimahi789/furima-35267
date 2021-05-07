@@ -75,7 +75,24 @@ RSpec.describe AddressBuyManage, type: :model do
         @address_buy_manage.valid?
         expect(@address_buy_manage.errors.full_messages).to include("Item can't be blank")
       end
+      it "post_numはハイフン無しでは登録できないこと" do
+        @address_buy_manage.post_num = '1234567'
+        @address_buy_manage.valid?
+        expect(@address_buy_manage.errors.full_messages).to include("Post num is invalid. Include hyphen(-)")
+      end
+      it "phone_numは英数混合では登録できないこと" do
+        @address_buy_manage.phone_num = 'aaa1111aaaa'
+        @address_buy_manage.valid?
+        expect(@address_buy_manage.errors.full_messages).to include("Phone num is invalid")
+      end
+      it "phone_numは12桁以上では登録できないこと" do
+        @address_buy_manage.phone_num = '1111111111111'
+        @address_buy_manage.valid?
+        expect(@address_buy_manage.errors.full_messages).to include("Phone num is invalid")
+      end
     end
   end
 end
+
+
 
