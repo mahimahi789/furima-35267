@@ -41,17 +41,16 @@
 
 | Column  | Type       | Options                         |
 | ------- | ---------- | ------------------------------  |
+| post_num | string | null: false  |
 | area_id     | integer | null: false |
 | municipality | string | null: false  ｜
 | address | string | null: false  ｜
 | building | string |      ｜
 | phone_num | string | null: false  ｜
-| post_num | string | null: false  |
 | buy_manage_id | integer | null: false, foreign_key: true |
 
 ### Association
-
-
+- belongs_to :buy_manage
 
 ## buy_manages テーブル
 

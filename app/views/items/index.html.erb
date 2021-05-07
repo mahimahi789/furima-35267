@@ -123,13 +123,11 @@
           <div class='item-img-content'>
             <%= image_tag item.image, class: "item-img" %>
 
-            <%# 商品が売れていればsold outを表示しましょう %>
-            <%# if item.burden_id.present? %>
+            <% if item.reload_buy_manage.present? %>
               <div class='sold-out'>
                 <span>Sold Out!!</span>
               </div>
-            <%# end %>
-            <%# //商品が売れていればsold outを表示しましょう %>
+            <% end %>
 
           </div>
             <div class='item-info'>
