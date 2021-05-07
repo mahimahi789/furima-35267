@@ -5,9 +5,6 @@ class BuyManagesController < ApplicationController
 
   def index
     @address_buy_manage = AddressBuyManage.new
-    if current_user == @item.user || @item.reload_buy_manage.present?
-      redirect_to root_path
-    end
   end
   
   def create

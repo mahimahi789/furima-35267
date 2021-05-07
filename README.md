@@ -50,8 +50,8 @@
 | buy_manage_id | integer | null: false, foreign_key: true |
 
 ### Association
-
-
+- has_one :buy_manage
+- has_one :user
 
 ## buy_manages テーブル
 
