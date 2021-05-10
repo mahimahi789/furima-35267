@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :move_to_index, only: [:update, :edit, :destroy]
-  before_action :move_index, only: [:update]
+  before_action :move_index, only: :update
   
 
   def index
@@ -64,7 +64,7 @@ class ItemsController < ApplicationController
   end
 
   def move_index
-    if current_user == @item.user || @item.reload_buy_manage.present?
+    if current_user != @item.user || @item.reload_buy_manage.present?
       redirect_to root_path
     end
   end
