@@ -17,6 +17,7 @@
 
 - has_many :items
 - has_many :buy_manages
+- has_many :comments 
 
 ## items テーブル
 
@@ -36,6 +37,7 @@
 
 - has_one :buy_manage
 - belongs_to :user
+- has_many :comments 
 
 ## addresses テーブル
 
@@ -65,4 +67,15 @@
 - belongs_to :user
 - has_one :address
 
+## comments テーブル
 
+| Column  | Type       | Options                         |
+| ------- | ---------- | ------------------------------  |
+| user_id | integer |  |
+| item_id | integer |  |
+| text | text | null: false |
+
+### Association
+
+- belongs_to :item
+- belongs_to :user

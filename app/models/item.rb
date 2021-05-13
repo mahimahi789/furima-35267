@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   has_one :buy_manage
   belongs_to :user
   has_one_attached :image
+  has_many :comments  
 
   with_options presence: true do
     validates :item_name, length:{maximum:40}
